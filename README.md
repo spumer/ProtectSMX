@@ -13,15 +13,18 @@ This repo contains sources, examples and tests. "decrypted" file contains origin
 
 ## Not so easy! It's a not Extension!
 
-## Step1: Compile Sourcemod
+## Step 1: Compile Sourcemod
 
 First of all you should compile Sourcemod by yourself! Just follow the official instruction: https://wiki.alliedmods.net/Building_SourceMod
 
-## Step2: Edit sourcepawn LoadPlugin code
 
-* Of course you should add #include <protectsmx.h> to top of file. And add protectsmx.c to build script.
+## Step 2: Inject protectsmx
 
-### Sourcemod 1.8 (sourcemod/sourcepawn/vm/api.cpp)
+## Step 2.1: Edit sourcepawn LoadPlugin code
+
+* Add #include <protectsmx.h> to top of file
+
+### Sourcemod 1.8+ (sourcemod/sourcepawn/vm/api.cpp)
  
   In function **SourcePawnEngine2::LoadBinaryFromFile** replace
 
@@ -45,8 +48,26 @@ First of all you should compile Sourcemod by yourself! Just follow the official 
 
   Example: https://github.com/alliedmodders/sourcemod/blob/sourcemod-1.7.0/sourcepawn/jit/engine2.cpp#L29
 
-## Step3: Change KEY in **protectsmx.c** to you own
 
+## Step 2.2: Prepare to build
+
+Target folder depend on your SM version `sourcepawn/jit` or `sourcepawn/vm` (Step 2.1)
+
+* Copy protectsmx.h and protectsmx.cpp
+* Add protectsmx.c to build script (AMBuilder)
+
+Examples:
+
+https://github.com/alliedmodders/sourcepawn/blob/d584d55f2ad60b58070134fd1645cda27e8cf232/vm/AMBuilder#L34
+https://github.com/alliedmodders/sourcemod/blob/sourcemod-1.7.0/sourcepawn/jit/AMBuilder#L32
+
+
+## Step 3: Change KEY in **protectsmx.c** to you own
+
+## Step 4: Compile sourcemod again!
+
+ * After that you will have sourcepawn.jit.x86.so which will encrypt all .smx files. You can use only it or whole self-compiled SM.
+ 
 
 # Credits
 Blowfish for C++: https://github.com/h2so5/Blowfish
