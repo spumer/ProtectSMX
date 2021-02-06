@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <cstddef>
 #include <vector>
+#include <memory>
 
 #include <am-utility.h>
 #include <smx/smx-headers.h>
@@ -33,17 +34,17 @@ class FileReader
 {
  public:
   explicit FileReader(FILE *fp);
-  FileReader(ke::AutoArray<uint8_t> &buffer, size_t length);
+  FileReader(std::unique_ptr<uint8_t[]> &buffer, size_t length);
 
   const uint8_t *buffer() const {
-	return buffer_;
+	return buffer_.get();
   }
   size_t length() const {
 	return length_;
   }
 
  protected:
-  ke::AutoArray<uint8_t> buffer_;
+  std::unique_ptr<uint8_t[]> buffer_;
   size_t length_;
 };
 
@@ -150,16 +151,16 @@ FileReader::FileReader(FILE *fp)
   if (fseek(fp, 0, SEEK_SET) != 0)
 	return;
 
-  ke::AutoArray<uint8_t> bytes(new uint8_t[size]);
-  if (!bytes || fread(bytes, sizeof(uint8_t), size, fp) != (size_t)size)
+  std::unique_ptr<uint8_t[]> bytes(new uint8_t[size]);
+  if (!bytes || fread(bytes.get(), sizeof(uint8_t), size, fp) != (size_t)size)
 	return;
 
-  buffer_ = bytes.take();
+  buffer_ = std::move(bytes);
   length_ = size;
 }
 
-FileReader::FileReader(ke::AutoArray<uint8_t> &buffer, size_t length)
- : buffer_(buffer.take()),
+FileReader::FileReader(std::unique_ptr<uint8_t[]> &buffer, size_t length)
+ : buffer_(std::move(buffer)),
    length_(length)
 {
 }
