@@ -58,8 +58,8 @@ Target folder depend on your SM version `sourcepawn/jit` or `sourcepawn/vm` (Ste
 
 Examples:
 
-https://github.com/alliedmodders/sourcepawn/blob/d584d55f2ad60b58070134fd1645cda27e8cf232/vm/AMBuilder#L34
-https://github.com/alliedmodders/sourcemod/blob/sourcemod-1.7.0/sourcepawn/jit/AMBuilder#L32
+ - https://github.com/alliedmodders/sourcepawn/blob/d584d55f2ad60b58070134fd1645cda27e8cf232/vm/AMBuilder#L34
+ - https://github.com/alliedmodders/sourcemod/blob/sourcemod-1.7.0/sourcepawn/jit/AMBuilder#L32
 
 
 ## Step 3: Change KEY in **protectsmx.c** to you own
