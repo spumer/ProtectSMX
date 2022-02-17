@@ -54,7 +54,7 @@ First of all you should compile Sourcemod by yourself! Just follow the official 
 Target folder depend on your SM version `sourcepawn/jit` or `sourcepawn/vm` (Step 2.1)
 
 * Copy protectsmx.h and protectsmx.cpp
-* Add protectsmx.c to build script (AMBuilder)
+* Add protectsmx.cpp to build script (AMBuilder)
 
 Examples:
 
@@ -62,7 +62,7 @@ Examples:
  - https://github.com/alliedmodders/sourcemod/blob/sourcemod-1.7.0/sourcepawn/jit/AMBuilder#L32
 
 
-## Step 3: Change KEY in **protectsmx.c** to you own
+## Step 3: Change KEY in **protectsmx.cpp** to you own
 
 ## Step 4: Compile sourcemod again!
 
